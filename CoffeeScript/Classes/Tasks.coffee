@@ -1,21 +1,21 @@
-# Define the Tasks class
+# Manages a list of Task classes and provides a set of stepper methods to
+# advance and rewind the current position in the tasks queue.
 class Tasks
 
-	# Sets up the local task queue
+	# Initialize the class variables and add any Task functions that were
+	# passed in.
 	#
-	# param array tasks Adds functions in this array to the task queue
-	constructor: ->
-		# Use the tasks argument instead if it exists, otherwise, default it to
-		# an empty array
-		tasks = if arguments[0]? then arguments[0] else []
-		# Set everything to its initial state
+	# param  array  tasks  optional  Adds functions in this array to the task
+	#                                queue. Defaults to an empty array.
+	constructor: (tasks = []) ->
+		# Set everything to the initial state
 		@reset()
 		# Add each function in the passed tasks array
 		@add taskFunction for taskFunction in tasks if tasks.length > 0
 
-	# Resets everything to an initial state
+	# Resets the class variables to their initial state.
 	#
-	# return object A reference to this class instance
+	# return  object  A reference to this class instance.
 	reset: ->
 		# Holds the state object that the tasks share
 		@state = {}
@@ -26,20 +26,20 @@ class Tasks
 		# Return a reference to this class instance
 		return @
 
-	# Adds a task function to the task queue
+	# Adds a single task function to the task queue.
 	#
-	# param function taskFunction A single task function to add to the queue
-	# return object A reference to this class instance
+	# param   function  taskFunction  A single task function to add to the
+	#                                 queue.
+	# return  object                  A reference to this class instance.
 	add: (taskFunction) ->
 		# Adds a task to the task queue
 		@taskQueue.push new Task taskFunction, @
 		# Return a reference to this class instance
 		return @
 
-	# Runs the next task in the tasks queue
+	# Runs the next task function in the tasks queue.
 	#
-	# return object Returns a reference to this class instance by returning the
-	#               result of the run() method
+	# return  object  Returns the result of the run class method.
 	next: ->
 		# Do nothing unless a next task actually exists
 		return @ unless @exists @currentTask + 1
@@ -48,10 +48,9 @@ class Tasks
 		# Run the current task
 		return @run()
 
-	# Runs the previous task in the tasks queue
+	# Runs the previous task in the tasks queue.
 	#
-	# return object Returns a reference to this class instance by returning the
-	#               result of the run() method
+	# return  object  Returns the result of the run class method.
 	previous: ->
 		# Do nothing unless a previous task actually exists
 		return @ unless @exists @currentTask - 1
@@ -60,16 +59,16 @@ class Tasks
 		# Run the current task
 		return @run()
 
-	# Returns true if a task exists in the specified queue location
+	# Returns true if a task exists in the specified queue location.
 	#
-	# param int taskIndex The index in the task queue to check
-	# return boolean If the requested queue index exists, true
+	# param   integer  taskIndex  The index in the task queue to check.
+	# return  boolean             If the requested queue index exists, true.
 	exists: (taskIndex) ->
 		@taskQueue[taskIndex]?
 
-	# Runs the current task in the task queue
+	# Runs the current task in the task queue.
 	#
-	# return object A reference to this class instance
+	# return  object  A reference to this class instance.
 	run: ->
 		# Run the current task, passing in a reference to the this Tasks class
 		# instance, assuming we have a task at this queue position

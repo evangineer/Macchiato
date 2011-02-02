@@ -1,27 +1,25 @@
-# Define a class for a single Task
+# Define a class that represents a single Task
 class Task
 
-	# Take the task that gets passed in and assign it to this object
+	# Takes the task function and any options, then assigns them to this
+	# object.
 	#
-	# param function taskFunction The task function itself
-	# param object runScope optional If set, the task function runs at this
-	#                                scope
-	constructor: (taskFunction) ->
+	# param  function  taskFunction            The task function itself.
+	# param  object    runScope      optional  The scope to run the task
+	#                                          function at. Defaults to @.
+	constructor: (taskFunction, runScope = @) ->
 		# Assign the passed task function to this object
 		@taskFunction = taskFunction
-		# Assign the value of the optional runScope parameter to this object if
-		# it is set, otherwise, default to the current class scope
-		@runScope = if arguments[1]? then arguments[1] else @
+		# Assign the value of the optional runScope parameter to this object
+		@runScope = runScope
 
-	# Runs this task using the passed arguments
+	# Runs the task function using the passed arguments.
 	#
-	# param array taskArguments optional Arguments to forward to the task
-	#                                    function itself
-	# return object A reference to this class instance
-	run: ->
-		# Grab the optional taskArguments parameter if it is set, otherwise
-		# default it to an empty array
-		taskArguments = if arguments[0]? then arguments[0] else []
+	# param   array   taskArguments  optional  Arguments to forward to the task
+	#                                          function itself.
+	# return  object                           A reference to this class
+	#                                          instance.
+	run: (taskArguments = []) ->
 		# Run this task using the run scope object as the function scope
 		@taskFunction.apply @runScope, taskArguments
 		# Return a reference to this class instance

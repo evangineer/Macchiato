@@ -8,7 +8,7 @@ exit = process.exit
 
 # Define the list of files that make up the Core
 sourceFiles = [
-	'MetaUtilities'
+	'Meta'
 	'Classes/Task'
 	'Classes/Tasks'
 	'Classes/IdempotentTask'
