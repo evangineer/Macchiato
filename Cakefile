@@ -69,6 +69,8 @@ echo "#{nameAndVersion} - #{libraryTagline}"
 
 # Define the main build task
 task 'build', "Build the complete #{libraryName} library", ->
+	# Echo the fact that we are doing something
+	echo "Building the complete #{libraryName} library..."
 	# Loop over each of the files in the source file array
 	loadSourceFile filename for filename in sourceFiles
 	# Compile all of the data in all of the source files into a single CoffeeScript file
@@ -81,8 +83,16 @@ task 'build', "Build the complete #{libraryName} library", ->
 		fs.unlink concatenatedSourceFilename, (err) ->
 			# If we have an error throw it
 			handleError err if err
+			# Echo the fact that we are done now
+			echo 'Done.'
 
 # Define the task that resets everything
 task 'clean', 'Removes everything that build creates', ->
+	# State that we are doing something
+	echo 'Cleaning everything up...'
 	# Delete the Macchiato.js file
-	fs.unlink "JavaScript/#{outputFilename}"
+	fs.unlink "JavaScript/#{outputFilename}", (err) ->
+		# If we have an error throw it
+		handleError err if err
+		# Echo the fact that we are done now
+		echo 'Done.'
