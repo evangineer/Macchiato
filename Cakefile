@@ -43,10 +43,8 @@ handleError = (err) ->
 		echo err.message
 		# Exit with a failure
 		exit 1
-	# Otherwise, we dont have a message member...
-	else
-		# ...so we just throw
-		throw err
+	# ...so we just throw
+	throw err
 
 # Define the main build task
 task 'build', 'Build the complete library including all of the classes for both server and client-side development', ->
