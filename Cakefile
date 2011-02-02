@@ -6,6 +6,11 @@ fs     = require 'fs'
 echo = console.log
 exit = process.exit
 
+# String utilities
+trim = (value) ->
+	# Return the trimmed value of the string
+	value.replace /^\s+|\s+$/g, ''
+
 # Define the list of files that make up the Core
 sourceFiles = [
 	'Meta'
@@ -16,19 +21,28 @@ sourceFiles = [
 	'Classes/DebouncedTask'
 ]
 
+# Returns the contents of the specified filename
+read = (filename) ->
+	# Read the file and return it
+	fs.readFileSync filename, 'ascii'
+
+# Grab the name of the library and the version from the NAME and VERSION files
+libraryName    = trim read 'NAME'
+libraryVersion = trim read 'VERSION'
+
 # Define a place for the source file data to go
 sourceFileData = []
 
 # Define the filename for the concatenated CoffeeScript source code
-concatenatedSourceFilename = 'Macchiato.coffee'
+concatenatedSourceFilename = "#{libraryName}.coffee"
 
 # Define the filename for the finished JavaScript file
-outputFilename = 'Macchiato.js'
+outputFilename = "#{libraryName}.js"
 
 # Reads a file from the specified filename, pushing into the source file data array
 loadSourceFile = (filename) ->
 	# Read the source file contents into the source file data array
-	sourceFileData.push fs.readFileSync "CoffeeScript/#{filename}.coffee"
+	sourceFileData.push fs.readFileSync "CoffeeScript/#{filename}.coffee", 'ascii'
 
 # Writes a single file containing all of the data in the source file data array
 writeConcatenatedSourceFile = ->
@@ -45,6 +59,9 @@ handleError = (err) ->
 		exit 1
 	# ...so we just throw
 	throw err
+
+# Display the name and version number
+echo "#{libraryName} #{libraryVersion}"
 
 # Define the main build task
 task 'build', 'Build the complete library including all of the classes for both server and client-side development', ->
