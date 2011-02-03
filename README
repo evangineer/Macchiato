@@ -1,8 +1,18 @@
+License
+=======
+
+Macchiato is, and always will be, free and open source software, both for fun
+and for profit.
+
+All files in this repository are released under the terms specified in the file
+LICENSE. This is our copy of the MIT License. For more information on the MIT
+License, please see "http://www.opensource.org/licenses/mit-license".
+
 Comments from the Developer(s)
 ==============================
 
 Macchiato is our personal labor of love. Anything that we have ever found
 ourselves writing over, and over, and over again will eventually make it into
-this library. The classes that get checked-in are indispensable to almost every
-significant new JavaScript project that we work on, and hopefully others find
-find them to be as useful as we have found them to be. <software@neuroxy.com>
+this library. The code that gets checked-in here is indispensable to almost
+every significant new JavaScript project that we work on, and hopefully others
+find it to be as useful as we have found it to be. <development@neuroxy.com>
