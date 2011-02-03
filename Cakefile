@@ -40,12 +40,13 @@ concatenatedSourceFilename = "#{libraryName}.coffee"
 # Define the filename for the finished JavaScript file
 outputFilename = "#{libraryName}.js"
 
-# Reads a file from the specified filename, pushing into the source file data array
+# Reads a file from the specified filename, pushing into the source file data
+# array
 loadSourceFile = (filename) ->
 	# Read the source file contents into the source file data array
-	sourceFileData.push fs.readFileSync "CoffeeScript/#{filename}.coffee", 'ascii'
+	sourceFileData.push read "CoffeeScript/#{filename}.coffee"
 
-# Writes a single file containing all of the data in the source file data array
+# Writes a single file containing the joined data in the source file data array
 writeConcatenatedSourceFile = ->
 	# Write a single CoffeeScript file in the same directory as this Cakefile
 	fs.writeFileSync concatenatedSourceFilename, sourceFileData.join "\n\n"
@@ -58,7 +59,7 @@ handleError = (err) ->
 		echo err.message
 		# Exit with a failure
 		exit 1
-	# ...so we just throw
+	# Otherwise we just throw
 	throw err
 
 # Start building the string that shows up as the first line of output
@@ -73,10 +74,15 @@ task 'build', "Build the complete #{libraryName} library", ->
 	echo "Building the complete #{libraryName} library..."
 	# Loop over each of the files in the source file array
 	loadSourceFile filename for filename in sourceFiles
-	# Compile all of the data in all of the source files into a single CoffeeScript file
+	# Compile all of the data in all of the source files into a single
+	# CoffeeScript file
 	writeConcatenatedSourceFile()
-	# Run the shell command to compile the concatenated CoffeeScript file into JavaScript
-	exec "cat #{concatenatedSourceFilename} | coffee -sc > JavaScript/#{outputFilename}", (err, stdout, stderr) ->
+	# Define the shell command to compile the concatenated CoffeeScript file
+	# into a single JavaScript file
+	compileCommand = "cat #{concatenatedSourceFilename} | " +
+		"coffee -sc > JavaScript/#{outputFilename}"
+	# Run the compile command string
+	exec compileCommand, (err, stdout, stderr) ->
 		# If we have an error throw it
 		handleError err if err
 		# Delete the Macchiato.coffee file
