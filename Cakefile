@@ -15,10 +15,17 @@ trim = (value) ->
 sourceFiles = [
 	'Meta'
 	'Classes/Task'
-	'Classes/Tasks'
 	'Classes/IdempotentTask'
 	'Classes/DelayedTask'
 	'Classes/DebouncedTask'
+	'Classes/Tasks'
+	'Classes/Observable'
+	'Classes/PublishSubscribe'
+]
+
+# Define the list of files that make up the Unit Tests
+unitTestSourceFiles = [
+	'Tests/TestPublishSubscribe'
 ]
 
 # Returns the contents of the specified filename
