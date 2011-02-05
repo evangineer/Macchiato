@@ -1,4 +1,5 @@
 Macchiato
+=========
 
 Building the Macchiato Library
 ==============================
