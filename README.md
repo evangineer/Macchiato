@@ -2,7 +2,7 @@ Macchiato
 =========
 
 Building the Macchiato Library
-==============================
+------------------------------
 
 If you have Node.js and CoffeeScript installed, chances are you have Cake - the
 CoffeeScript build tool. If so, you should be able to run:
@@ -22,7 +22,7 @@ The finished library file will be inside of the Macchiato/JavaScript directory,
 and should be named "Macchiato.js".
 
 License
-=======
+-------
 
 Macchiato is, and always will be, free and open source software, both for fun
 and for profit.
@@ -31,7 +31,7 @@ All files in this repository are released under the terms specified in the file
 LICENSE. For more information, see 'http://en.wikipedia.org/wiki/MIT_License'.
 
 Comments from the Developer(s)
-==============================
+------------------------------
 
 Macchiato is a personal labor of love. Anything that I have ever found myself
 writing over, and over, and over again will eventually make it into this
