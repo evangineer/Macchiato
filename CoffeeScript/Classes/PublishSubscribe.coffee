@@ -73,15 +73,17 @@ class PublishSubscribe
 	# channel, and, if a named topic channel is provided, the named topic
 	# channel as well.
 	#
-	# param   string  name     The named topic channel that we want notify. If
-	#                          the name is '*', only the universal channel is
-	#                          issued the notification. Otherwise, both the
-	#                          named topic channel as well as the universal
-	#                          channel are notified.
-	# param   mixed   message  The message that we want to notify all of the
-	#                          observers with.
-	# return  object           A reference to this class instance.
-	notifyObservers: (name, message) ->
+	# param   string  name               The named topic channel that we want
+	#                                    notify. If the name is '*', only the
+	#                                    universal channel is issued the
+	#                                    notification. Otherwise, both the
+	#                                    named topic channel as well as the
+	#                                    universal channel are notified.
+	# param   mixed   message  optional  The message that we want to notify all
+	#                                    of the observers with. Defaults to
+	#                                    null if nothing is passed in.
+	# return  object                     A reference to this class instance.
+	notifyObservers: (name, message = null) ->
 		# If a channel name was passed in
 		if name isnt '*'
 			# Notify the observers on the named topic channel, if the named
@@ -93,7 +95,7 @@ class PublishSubscribe
 		return @
 
 	# Simple alias for notifyObservers.
-	publish: (name, message) ->
+	publish: (name, message = null) ->
 		# Return the result of the notifyObservers method, passing the same
 		# argument values
 		return @notifyObservers name, message
