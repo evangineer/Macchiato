@@ -77,9 +77,9 @@ class Tasks
 		return @
 
 # Define a simple helper function that creates a new instance of Tasks, using
-# the passed tasks argument, then runs it immediately
+# the passed tasks argument, then runs it immediately.
 #
-# param array tasks The tasks to add to the new Tasks object
+# param  array  tasks  The tasks to add to the new Tasks object.
 Tasks.runTasks = (tasks) ->
 	# Create the new Tasks class instance, and run it
 	new Tasks(tasks).run()
