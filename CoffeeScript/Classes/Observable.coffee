@@ -30,17 +30,17 @@ class Observable
 	# Issues an event to all of the observer functions in the observers
 	# collection on this class instance.
 	#
-	# param   mixed   message  The message that we want to notify all of the
-	#                          observers with.
-	# return  object           A reference to this class instance.
-	notifyObservers: (message) ->
+	# param   mixed   message  optional  The message that we want to notify all
+	#                                    of the observers with.
+	# return  object                     A reference to this class instance.
+	notifyObservers: (message = null) ->
 		# Notify all of the observer functions in the observers collection
 		observer message for observer in @observers if @observers.length > 0
 		# Return a reference to this class instance
 		return @
 
 	# Simple alias for notifyObservers.
-	publish: (message) ->
+	publish: (message = null) ->
 		# Return the result of the notifyObservers method, passing the same
 		# argument value
 		return @notifyObservers message
