@@ -1,9 +1,9 @@
 # This file defines the Observable class, and exposes it to the outside world.
 #
 # Observable is an implementation of the observer pattern, which is a
-# simplified subset of the publish/subscribe or pub/sub pattern. Observable
-# notification messages are sent to all of the observer functions in the
-# observers collection.
+# simplified subset of the publish/subscribe or pub/sub pattern. If provided,
+# Observable notification messages are sent to all of the observer functions in
+# the observers collection.
 class Observable
 
 	# Creates the class variable to store the observers.
