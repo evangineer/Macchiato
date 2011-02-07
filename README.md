@@ -1,6 +1,5 @@
 Macchiato
 =========
-
 Building the Macchiato Library
 ------------------------------
 
@@ -23,16 +22,20 @@ and should be named "Macchiato.js".
 
 License
 -------
-
 Macchiato is, and always will be, free and open source software, both for fun
 and for profit.
 
 All files in this repository are released under the terms specified in the file
 LICENSE. For more information, see 'http://en.wikipedia.org/wiki/MIT_License'.
 
+Contributing
+------------
+Macchiato needs your help! If you want to be a contributer, of anything, you
+are more then welcome to do so. The project guidelines for contributers can be
+found in "CONTRIBUTORS.md".
+
 Comments from the Developer(s)
 ------------------------------
-
 Macchiato is a personal labor of love. Anything that I have ever found myself
 writing over, and over, and over again will eventually make it into this
 library. The code that gets checked-in here is indispensable to almost every
