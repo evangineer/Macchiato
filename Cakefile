@@ -21,6 +21,8 @@ sourceFiles = [
 	'Classes/Tasks'
 	'Classes/Observable'
 	'Classes/PublishSubscribe'
+	'Classes/Test'
+	'Classes/Tests'
 ]
 
 # Define the list of files that make up the Unit Tests
