@@ -26,7 +26,10 @@ upon, here is the not very heavy-handed code formatting guidelines:
 1. Code will use a mixed scheme of both tabs and spaces for indentation. Tabs
    are to be used to indent code up to the first non-whitespace character. From
    there to the end of the line, spaces are to be used for any indentation.
-2. While writing code, it should be a goal to keep individual lines within 80
+2. When working on code, your code editor should be configured so that your
+   visible tab width is 4. Also, watch out for editors that try to "help" you
+   by automatically expanding your tabs to spaces.
+3. While writing code, it should be a goal to keep individual lines 80
    characters in length. This is not because of some antiquated attachment to
    80-column displays. This is because text is more readable when lines fit
    into a narrow visual column. However, sometimes CoffeeScript's syntax will
@@ -35,18 +38,18 @@ upon, here is the not very heavy-handed code formatting guidelines:
    are placed upon the same line. In general, the vast majority of the code in
    this project should be able to comply with the 80 character line length
    without any trouble.
-3. All classes, class methods, object methods and stand-alone functions should
+4. All classes, class methods, object methods and stand-alone functions should
    have comments that describe the purpose of the function, as well as any
    input parameters, return values, and exceptions that can be thrown. The
    guidelines for these comments are outlined in the area titled "CoffeeScript
    Source Code Documentation" below.
-4. Source code comments should appear often and express exactly what the
+5. Source code comments should appear often and express exactly what the
    developers intentions are in simple human terms. Comments should be added
    until the point where adding comments would reduce the readability of the
    code. In practice, this will almost never happen, unless the commenter is
    intentionally trying to make a point against code comments. But if your goal
    is to create useful code comments, you'll find a way.
-5. These guidelines can be added to, but once a guideline is accepted, making
+6. These guidelines can be added to, but once a guideline is accepted, making
    changes to that guideline should be avoided at almost all costs. In the
    rare event that a developer chooses to suggest a change to one of these
    guidelines, and that change is accepted, that developer will also take on
