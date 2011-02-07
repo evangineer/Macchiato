@@ -1,9 +1,7 @@
-# This file defines the Tests class, and exposes it to the outside world. This
-# class is designed to be the base class for collections of unit tests intended
-# to be run by the TestSuite class.
+# This file defines the Tests class, and exposes it to the outside world.
 #
 # This class is not intended to be instantiated directly. Instead, child
-# classes should be created that are collections of unit tests.
+# classes should be created that have collections of unit test methods.
 #
 # A method created on the child class that is intended to be a test should be
 # prefixed with "test". For example "test1Plus1Equals2" would be considered
@@ -11,7 +9,7 @@
 #
 # Other methods that are not tests can also be added and called. Also, complex
 # inheritance schemes can be used to ease the creation of the application
-# state.
+# state for a particular unit test.
 #
 # Tests are intended to be fully asynchronous, and self-contained. When a test
 # function is called by [Tests].run(), the test function is passed a single
@@ -27,7 +25,7 @@
 # assume that each test method on the child class may be run in a completely
 # random order. Because of this, creating any reliance on external state during
 # any test is not recommended. Avoid class instance variables at all costs!
-class Tests extends PublishSubscribe
+class Tests
 
 	# Defines the events that this class exposes
 	constructor: ->
