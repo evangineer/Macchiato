@@ -3,6 +3,7 @@ Meta = {
 	# Holds a collection of all of the object and function references that get
 	# exposed.
 	exposed: {}
+
 	# Exposes the passed function or object reference to the parent scope using
 	# the passed name, and adds the name/reference pair to the exposed
 	# references collection.
@@ -25,6 +26,7 @@ Meta = {
 	# Execute the outer function immediately, passing in a reference to the
 	# parent scope
 	)(if exports? then exports else @)
+
 	# Overlays all of the named function and object references in the exposed
 	# objects collection onto the passed object.
 	#
