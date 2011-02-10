@@ -56,8 +56,6 @@ class Test extends PublishSubscribe
 		# Compare the left to the right and then forward the result of the test
 		# along with the human-readable description to the assert function.
 		@assert description, left is right
-		# Return a reference to this class instance
-		return @
 
 	# Asserts that the value passed in for the left-hand side of the comparison
 	# is not equal to the value passed in for the right-hand side of the
