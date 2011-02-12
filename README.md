@@ -29,8 +29,8 @@ Macchiato is, and always will be, free and open source software, both for fun
 and for profit.
 
 All files in this repository are released under the terms specified in the file
-LICENSE. For more information, please see the the Wikipedia article on the MIT
-License by clicking [here][wikipedia-mit-license].
+[LICENSE][repo-license]. For more information, please see the the Wikipedia
+article on the MIT License by clicking [here][wikipedia-mit-license].
 
 ## Contributing ##
 
@@ -51,6 +51,7 @@ by creating your own paragraph and tagging it at the end with your username and
 a URL of your choice.
 
 [homepage-coffeescript]: http://jashkenas.github.com/coffee-script/ "CoffeeScript's Homepage"
+[repo-license]: ./Macchiato/blob/master/LICENSE "View the file LICENSE in the Macchiato project repository"
 [wikipedia-mit-license]: http://en.wikipedia.org/wiki/MIT_License "Wikipedia article for the MIT License"
 [wiki-guidelines]: ./Macchiato/wiki/Guidelines-for-Contributors "Macchiato Wiki - Guidelines for Contributors"
 [github-sheatrevor]: http://github.com/sheatrevor/ "Shea Trevor's profile on GitHub"
