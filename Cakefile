@@ -1,5 +1,5 @@
 # Grab the node File System and Child Process libraries
-fs     = require 'fs'
+fs = require 'fs'
 {exec} = require 'child_process'
 
 # Shortcuts to common functions and variables
@@ -107,7 +107,5 @@ task 'clean', 'Removes everything that build creates', ->
 	echo 'Cleaning everything up...'
 	# Delete the Macchiato.js file
 	fs.unlink "JavaScript/#{outputFilename}", (err) ->
-		# If we have an error throw it
-		handleError err if err
 		# Echo the fact that we are done now
 		echo 'Done.'
