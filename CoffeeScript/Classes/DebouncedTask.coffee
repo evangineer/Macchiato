@@ -1,8 +1,11 @@
-# Define a class for a Debounced Task
+# This file defines the DebouncedTask class, and exposes it to the outside
+# world.
+#
+# DebouncedTask behaves similarly to DelayedTask, except any existing task is
+# automatically cancelled every time the run method is called.
 class DebouncedTask extends DelayedTask
 
-	# Takes the task function and any options, then assigns them to this
-	# object.
+	# Takes the task function and any options, then assigns them to this object.
 	#
 	# param  function  taskFunction            The task function itself.
 	# param  integer   delay         optional  The amount of delay, in
@@ -13,8 +16,8 @@ class DebouncedTask extends DelayedTask
 		# Invoke the parent constructor, forwarding the arguments
 		super taskFunction, delay, runScope
 
-	# Runs the task function using the passed arguments, automatically
-	# resetting the previous timeout if there is one.
+	# Runs the task function using the passed arguments, automatically resetting
+	# the previous timeout if there is one.
 	#
 	# param   array   taskArguments  optional  Arguments to forward to the task
 	#                                          function itself.

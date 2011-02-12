@@ -52,5 +52,5 @@ a URL of your choice.
 
 [homepage-coffeescript]: http://jashkenas.github.com/coffee-script/ "CoffeeScript's Homepage"
 [wikipedia-mit-license]: http://en.wikipedia.org/wiki/MIT_License "Wikipedia article for the MIT License"
-[wiki-guidelines]: ./wiki/guidelines-for-contributors "Macchiato Wiki - Guidelines for Contributors"
+[wiki-guidelines]: wiki/guidelines-for-contributors "Macchiato Wiki - Guidelines for Contributors"
 [github-sheatrevor]: http://github.com/sheatrevor/ "Shea Trevor's profile on GitHub"
