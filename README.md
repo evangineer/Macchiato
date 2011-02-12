@@ -29,8 +29,8 @@ Macchiato is, and always will be, free and open source software, both for fun
 and for profit.
 
 All files in this repository are released under the terms specified in the file
-[LICENSE][repo-license]. For more information, please see the the Wikipedia
-article on the MIT License by clicking [here][wikipedia-mit-license].
+[LICENSE][repo-license]. For more information, please see the the [Wikipedia
+article on the MIT License][wikipedia-mit-license].
 
 ## Contributing ##
 
