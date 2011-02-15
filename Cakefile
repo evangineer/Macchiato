@@ -14,13 +14,13 @@ trim = (value) ->
 # Define the list of files that make up the Core
 sourceFiles = [
 	'Meta'
+	'Classes/Observable'
+	'Classes/PublishSubscribe'
 	'Classes/Task'
 	'Classes/IdempotentTask'
 	'Classes/DelayedTask'
 	'Classes/DebouncedTask'
 	'Classes/Tasks'
-	'Classes/Observable'
-	'Classes/PublishSubscribe'
 	'Classes/Test'
 	'Classes/Tests'
 ]
