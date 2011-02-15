@@ -39,4 +39,4 @@ class IdempotentTask extends Task
 		return @
 
 # Expose this class to the parent scope
-Meta.expose 'IdempotentTask', IdempotentTask
+Meta.expose "IdempotentTask", IdempotentTask
