@@ -1,4 +1,9 @@
-# Define a class for a single Delayed Task
+# This file defines the DelayedTask class, and exposes it to the outside world.
+#
+# DelayedTask wraps the actual running of the task function in JavaScript
+# timeout using the setTimeout function. This makes the execution of the "run"
+# method on this class detached from the eventual execution of the task function
+# itself.
 class DelayedTask extends Task
 
 	# Takes the task function and any options, then assigns them to this
@@ -61,4 +66,4 @@ class DelayedTask extends Task
 		return @
 
 # Expose this class to the parent scope
-Meta.expose 'DelayedTask', DelayedTask
+Meta.expose "DelayedTask", DelayedTask
