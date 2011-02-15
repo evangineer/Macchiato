@@ -1,8 +1,13 @@
 # This file defines the DebouncedTask class, and exposes it to the outside
 # world.
 #
-# DebouncedTask behaves similarly to DelayedTask, except any existing task is
-# automatically cancelled every time the run method is called.
+# DebouncedTask behaves similarly to DelayedTask, except any existing task that
+# has not already executed is automatically canceled when the run method is
+# called.
+#
+# This sort of methodology tends to work really well for situations in which
+# multiple thread-blocking events need to be compiled into a single action that
+# can be executed whenever the JavaScript thread becomes available again.
 class DebouncedTask extends DelayedTask
 
 	# Takes the task function and any options, then assigns them to this object.
@@ -32,4 +37,4 @@ class DebouncedTask extends DelayedTask
 		return @
 
 # Expose this class to the parent scope
-Meta.expose 'DebouncedTask', DebouncedTask
+Meta.expose "DebouncedTask", DebouncedTask
