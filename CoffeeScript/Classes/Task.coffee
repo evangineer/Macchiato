@@ -25,10 +25,10 @@ class Task extends PublishSubscribe
 	# return  object                           A reference to this class
 	#                                          instance.
 	run: (taskArguments = []) ->
+		# Notify any observers attached to the "run" channel
+		@notifyObservers "run", [@]
 		# Wrap this run attempt in a try/catch so we can capture exceptions
 		try
-			# Notify any observers attached to the "run" channel
-			@notifyObservers "run", [@]
 			# Run this task using the run scope object as the function scope
 			@taskFunction.apply @runScope, taskArguments
 		# If an exception is thrown, catch it

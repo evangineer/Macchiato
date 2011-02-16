@@ -46,6 +46,9 @@ class Test extends PublishSubscribe
 	run: ->
 		# This test has started
 		@started = true
+		# Issue the start notification
+		@notifyObservers "start", [@]
+		#
 		# Return a reference to this class instance
 		return @
 
