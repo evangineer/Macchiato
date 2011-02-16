@@ -27,16 +27,16 @@
 # any test is not recommended. Avoid class instance variables at all costs!
 class Tests
 
-	# Defines the events that this class exposes
-	constructor: ->
-		# TODO: Write the body of the constructor
-
-	# Generates a list of all of the test functions that are defined on this
-	# class instance, and runs them in the order we find them.
-	#
-	#
+	# Runs all of the test methods defined on this class instance
 	run: ->
-		# TODO: Write the body of the run function
+		# Loop over all of the members of this class, searching for test
+		# methods
+		for own name, method of @
+			# Move on if the name does not match what is expected
+			continue if not name.match /^test[a-z0-9_]*$/i
+			# Move on if the data type is not a function
+			continue if typeof method isnt "function"
+			# Add the test results
 
 # Expose this class to the parent scope
-Meta.expose 'Tests', Tests
+Meta.expose "Tests", Tests
