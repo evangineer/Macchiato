@@ -4,18 +4,19 @@ class TestPublishSubscribe extends Tests
 	# Creates a new instance of the PublishSubscribe class, adds several named
 	# topic queues to it, and returns it.
 	createTestInstance: ->
-		# Create a new instance of the PublishSubscribe class
-		instance = new PublishSubscribe()
-		# Add 3 named topic queues to it
-		instance.addChannels ["channel-a", "channel-b", "channel-c"]
-		# Return a reference to the new test object
-		return instance
+		# Create a new instance of the PublishSubscribe class, add 3 named
+		# topic queues to it, and return it
+		return new PublishSubscribe([
+			"channel-a",
+			"channel-b",
+			"channel-c"
+		])
 
 	# Attempt to add a single observer to channel-a and then publish a single
 	# notification message to it.
 	#
 	# param  object  test  A reference to the Test object.
-	testSimpleObserver: (test) ->
+	testNamedTopicChannelObserver: (test) ->
 		# Create a fresh test PublishSubscribe class instance to play with
 		instance = @createTestInstance()
 		# Attempt to add the observer function to the channel-a topic
@@ -26,7 +27,7 @@ class TestPublishSubscribe extends Tests
 			test.complete()
 		# Attempt to trigger the observer function by issuing a notification in
 		# the channel-a topic, passing the number 11 as the message
-		instance.publish "channel-a", 11
+		instance.publish "channel-a", [11]
 
 	# Attempts to add an observer to the universal channel and tests to make
 	# sure that the universal channel sees notifications on all of the
@@ -49,6 +50,6 @@ class TestPublishSubscribe extends Tests
 			test.complete() if counter is 3
 		# Attempt to trigger the universal channel a total of 3 times using
 		# channel-a, then channel-b, then channel-c
-		instance.publish "channel-a", 1
-		instance.publish "channel-b", 2
-		instance.publish "channel-c", 3
+		instance.publish "channel-a", [1]
+		instance.publish "channel-b", [2]
+		instance.publish "channel-c", [3]
