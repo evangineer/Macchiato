@@ -56,10 +56,18 @@ class DelayedTask extends Task
 	run: (taskArguments = []) ->
 		# Store a reference to the Timeout
 		@timeoutReference = setTimeout =>
+			# Notify any observers attached to the "run" channel
+			@notifyObservers "run", [@]
 			# Inform the class that this timeout function has been run
 			@timeoutExecuted = yes
-			# Run the task function at the desired scope
-			@taskFunction.apply @runScope, taskArguments
+			# Wrap this run attempt in a try/catch so we can capture exceptions
+			try
+				# Run the task function at the desired scope
+				@taskFunction.apply @runScope, taskArguments
+			# If an exception is thrown, catch it
+			catch exception
+				# Notify any observers attached to the "exception" channel
+				@notifyObservers "exception", [@, exception]
 		# Forward the desired delay to setTimeout
 		, @delay
 		# Return a reference to this class instance
