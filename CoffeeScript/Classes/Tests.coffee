@@ -11,16 +11,6 @@
 # inheritance schemes can be used to ease the creation of the application
 # state for a particular unit test.
 #
-# Tests are intended to be fully asynchronous, and self-contained. When a test
-# function is called by [Tests].run(), the test function is passed a single
-# argument. This argument will be an instance of the Test class, and this
-# instance is used to track the state of the current test that is running.
-#
-# From within the test function, [Test].assert() is used to make the individual
-# assertions. After all of the tests have finished running, use
-# [Test].complete() to indicate that there is no further processing to be done
-# as part of that test.
-#
 # Because of the asynchronous way that the tests are run, the developer must
 # assume that each test method on the child class may be run in a completely
 # random order. Because of this, creating any reliance on external state during

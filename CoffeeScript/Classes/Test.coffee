@@ -1,4 +1,15 @@
-# This file defines the Test class, and exposes it to the outside world.
+# This file defines the Test class, and exposes it to the outside world. This
+# class is designed to manage the state of a single unit test.
+#
+# The Test class is designed to be used in such a way that each unit test can be
+# run asynchronously from all other tests. To support this behavior, the test
+# function is passed a single argument. This argument is the instance of the
+# Test class instance that is managing the test.
+#
+# From within the test function, the methods "assert", "assertEqual" and
+# "assertNotEqual" are used to make assertions. After all of the assertions have
+# been made, the method "complete" is used to indicate that the test is
+# finished.
 class Test extends PublishSubscribe
 
 	# After calling the parent constructor, we register the topic channels for
@@ -35,7 +46,6 @@ class Test extends PublishSubscribe
 	run: ->
 		# This test has started
 		@started = true
-		# Wrap the task execution in 
 		# Return a reference to this class instance
 		return @
 
