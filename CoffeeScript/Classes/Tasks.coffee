@@ -85,4 +85,4 @@ Tasks.runTasks = (tasks) ->
 	new Tasks(tasks).run()
 
 # Expose this class to the parent scope
-Meta.expose 'Tasks', Tasks
+Meta.expose "Tasks", Tasks
