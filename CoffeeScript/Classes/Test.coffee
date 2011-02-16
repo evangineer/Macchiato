@@ -4,27 +4,51 @@ class Test extends PublishSubscribe
 	# After calling the parent constructor, we register the topic channels for
 	# assertions and test completion, and create the class variables to track
 	# the state of this test, and store the assertions.
-	constructor: ->
+	#
+	# param  string    name                    The name of the test that this
+	#                                          class instance is responsible for
+	#                                          managing.
+	# param  function  testFunction            A reference to the test function.
+	# param  object    testScope     optional  The scope to run the test
+	#                                          function at. Defaults to @.
+	constructor: (name, testFunction, testScope = @) ->
 		# Call the parent constructor
 		super()
-		# Create the "assertion" and "complete" topic channels
-		@addChannels ["assertion", "complete"]
-		# Create the flag that indicates if this test is complete or not
+		# Create a new instance of Task for the test function, and store it
+		@task = new Task testFunction, testScope
+		# Create the "start", "assertion", "complete", and exception named topic
+		# channels
+		@addChannels ["start", "assertion", "complete", "exception"]
+		# Create the flag that indicated if this test has started
+		@started = false
+		# Create the flag that indicates if this test is complete
 		@complete = false
-		# Create the flag that indicates if this test was successful or not
+		# Create the flag that indicates if this test threw an exception
+		@exception = false
+		# Create the flag that indicates if this test was generally successful
+		# or not
 		@successful = null
 		# Create a place for all of the assertions to go
 		@assertions = []
+
+	# Starts the test
+	run: ->
+		# This test has started
+		@started = true
+		# Wrap the task execution in 
+		# Return a reference to this class instance
+		return @
 
 	# Asserts that the value passed in the result parameter is boolean true.
 	#
 	# param   string   description  A human-readable description for this
 	#                               assertion.
-	# param   boolean  result       The result of a test, either true or false.
+	# param   boolean  subject      The subject of the assertion, either true or
+	#                               false.
 	# return  object                A reference to this class instance.
-	assert: (description, result) ->
+	assert: (description, subject) ->
 		# If the assertion is true
-		if result is true
+		if subject is true
 			# The assertion is a successful one
 			assertion = new AssertionSuccess description
 		# Otherwise
@@ -37,7 +61,7 @@ class Test extends PublishSubscribe
 		# Add this assertion to the local assertions collection
 		@assertions.push assertion
 		# Forward the assertion class instance to any observers
-		@notifyObservers "assertion", assertion
+		@notifyObservers "assertion", [@, assertion]
 		# Return a reference to this class instance
 		return @
 
@@ -85,9 +109,9 @@ class Test extends PublishSubscribe
 		@successful = true if @successful is null
 		# Issue the "complete" notification to any observers, forwarding a
 		# reference to this class instance
-		@notifyObservers "complete", @
+		@notifyObservers "complete", [@]
 		# Return a reference to this class instance
 		return @
 
 # Expose this class to the parent scope
-Meta.expose 'Test', Test
+Meta.expose "Test", Test
