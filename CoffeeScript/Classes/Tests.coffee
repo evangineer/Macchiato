@@ -17,8 +17,19 @@
 # any test is not recommended. Avoid class instance variables at all costs!
 class Tests
 
-	# Runs all of the test methods defined on this class instance
+	# Resets all of the class variables to their initial state.
+	#
+	# return  object  A reference to this class instance.
+	reset: ->
+		# Reset the local tests collection
+
+	# After resetting, this method runs all of the unit test methods defined on
+	# this class instance.
+	#
+	# return  object  A reference to this class instance.
 	run: ->
+		# Resets all of the class variables to their initial values
+		@reset()
 		# Loop over all of the members of this class, searching for test
 		# methods
 		for own name, method of @
@@ -26,7 +37,14 @@ class Tests
 			continue if not name.match /^test[a-z0-9_]*$/i
 			# Move on if the data type is not a function
 			continue if typeof method isnt "function"
-			# Add the test results
+			# Create a new instance of the Test class for managing this test
+			# function, and set it up to run at this class instances scope
+			test = new Test name, method, @
+			# Add this Test class instance to the tests collection on this
+			# class instance
+		# Return a reference to this class instance
+		return @
+			
 
 # Expose this class to the parent scope
 Meta.expose "Tests", Tests

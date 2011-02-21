@@ -96,8 +96,6 @@ task 'build', "Build the complete #{libraryName} library", ->
 		handleError err if err
 		# Delete the Macchiato.coffee file
 		fs.unlink concatenatedSourceFilename, (err) ->
-			# If we have an error throw it
-			handleError err if err
 			# Echo the fact that we are done now
 			echo 'Done.'
 
