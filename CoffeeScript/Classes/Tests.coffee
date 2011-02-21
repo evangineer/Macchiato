@@ -21,7 +21,10 @@ class Tests
 	#
 	# return  object  A reference to this class instance.
 	reset: ->
-		# Reset the local tests collection
+		# Initialize the local tests collection to an empty object
+		@tests = {}
+		# Return a reference to this class instance
+		return @
 
 	# After resetting, this method runs all of the unit test methods defined on
 	# this class instance.
@@ -32,7 +35,7 @@ class Tests
 		@reset()
 		# Loop over all of the members of this class, searching for test
 		# methods
-		for own name, method of @
+		for name, method of @
 			# Move on if the name does not match what is expected
 			continue if not name.match /^test[a-z0-9_]*$/i
 			# Move on if the data type is not a function
@@ -40,11 +43,17 @@ class Tests
 			# Create a new instance of the Test class for managing this test
 			# function, and set it up to run at this class instances scope
 			test = new Test name, method, @
+			# Subscribe to the universal observable channel
+			test.addObserver "*", (topic, testInstance) ->
+				# TODO: Make the output mechanism more robust
+				console.log topic + ' - ' + testInstance.name
 			# Add this Test class instance to the tests collection on this
 			# class instance
+			@tests[name] = test
+			# Run the test
+			test.run()
 		# Return a reference to this class instance
 		return @
-			
 
 # Expose this class to the parent scope
 Meta.expose "Tests", Tests
