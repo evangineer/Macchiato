@@ -35,7 +35,7 @@ class Test extends PublishSubscribe
 		# Create the flag that indicates if this test has started
 		@started = false
 		# Create the flag that indicates if this test is complete
-		@complete = false
+		@completed = false
 		# Create the flag that indicates if this test threw an exception
 		@exception = false
 		# Create the flag that indicates if this test was generally successful
@@ -134,7 +134,7 @@ class Test extends PublishSubscribe
 	# return  object  A reference to this class instance.
 	complete: ->
 		# Mark this test as being complete
-		@complete = true
+		@completed = true
 		# Indicate that this test was successful if none of the assertions
 		# indicated an assertion failure
 		@successful = true if @successful is null
