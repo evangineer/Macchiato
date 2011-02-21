@@ -25,6 +25,8 @@ class Test extends PublishSubscribe
 	constructor: (name, testFunction, testScope = @) ->
 		# Call the parent constructor
 		super()
+		# Store the name of this test on this class instance
+		@name = name
 		# Create a new instance of Task for the test function, and store it
 		@task = new Task testFunction, testScope
 		# Create the "start", "assertion", "complete", and exception named topic
@@ -63,14 +65,15 @@ class Test extends PublishSubscribe
 		# If the assertion is true
 		if subject is true
 			# The assertion is a successful one
-			assertion = new AssertionSuccess description
+#assertion = new AssertionSuccess description
 		# Otherwise
 		else
 			# If any assertions fail, that means that this test was not
 			# successful
 			@successful = false
 			# The assertion is a failure
-			assertion = new AssertionFailure description
+# assertion = new AssertionFailure description
+		assertion = description
 		# Add this assertion to the local assertions collection
 		@assertions.push assertion
 		# Forward the assertion class instance to any observers

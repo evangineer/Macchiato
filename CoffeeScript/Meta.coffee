@@ -35,7 +35,7 @@ Meta = {
 	# return  object               A reference to the destination object.
 	overlay: (destination) ->
 		# Clone the exposed references collection onto the destination object
-		destination[name] = reference for own name, reference of @exposed
+		destination[name] = reference for own name, reference of Meta.exposed
 		# Return a reference to the destination object
 		return destination
 }
