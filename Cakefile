@@ -36,7 +36,7 @@ read = (filename) ->
 	fs.readFileSync filename, 'ascii'
 
 # Grab the name, version, and taglines for the library
-libraryName    = trim read 'NAME'
+libraryName = trim read 'NAME'
 libraryVersion = trim read 'VERSION'
 libraryTagline = trim read 'TAGLINE'
 

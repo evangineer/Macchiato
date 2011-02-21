@@ -44,9 +44,9 @@ class Tests
 			# function, and set it up to run at this class instances scope
 			test = new Test name, method, @
 			# Subscribe to the universal observable channel
-			test.addObserver "*", (topic, testInstance) ->
+			test.addObserver "*", (channel, testInstance) ->
 				# TODO: Make the output mechanism more robust
-				console.log topic + ' - ' + testInstance.name
+				console.log channel + ' - ' + testInstance.name
 			# Add this Test class instance to the tests collection on this
 			# class instance
 			@tests[name] = test
