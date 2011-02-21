@@ -10,7 +10,8 @@ class Task extends PublishSubscribe
 	# param  object    runScope      optional  The scope to run the task
 	#                                          function at. Defaults to @.
 	constructor: (taskFunction, runScope = @) ->
-		# Call the parents
+		# Call the parent constructor
+		super()
 		# Assign the passed task function to this object
 		@taskFunction = taskFunction
 		# Assign the value of the optional runScope parameter to this object
