@@ -41,7 +41,7 @@ class TestPublishSubscribe extends Tests
 		# function gets notified
 		counter = 0
 		# Attempt to add the observer function to the universal channel
-		instance.subscribe "*", (message) ->
+		instance.subscribe "*", (channel, message) ->
 			# Increment the counter
 			counter++
 			# Assert that the message is the same as the counter
