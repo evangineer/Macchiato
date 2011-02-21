@@ -91,7 +91,13 @@ class PublishSubscribe
 	#                                              forward to all of the
 	#                                              observer functions. Defaults
 	#                                              to an empty array if nothing
-	#                                              is passed in.
+	#                                              is passed in. Subscribers to
+	#                                              the universal channel will
+	#                                              receive the name of the topic
+	#                                              channel as the first argument
+	#                                              to the observer function,
+	#                                              followed by the rest of the
+	#                                              arguments.
 	# return  object                               A reference to this class
 	#                                              instance.
 	notifyObservers: (name, observerArguments = []) ->
@@ -100,8 +106,12 @@ class PublishSubscribe
 			# Notify the observers on the named topic channel, if the named
 			# topic channel exists
 			@namedChannels[name]?.notifyObservers observerArguments
+		# Make a copy of the observer arguments so we can safely modify it
+		universalArguments = observerArguments.slice 0
+		# Make the topic channel name the first argument
+		universalArguments.unshift name
 		# Notify the observers on the universal channel no matter what
-		@universalChannel.notifyObservers observerArguments
+		@universalChannel.notifyObservers universalArguments
 		# Return a reference to this class instance
 		return @
 
