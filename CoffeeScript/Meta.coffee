@@ -38,6 +38,22 @@ Meta = {
 		destination[name] = reference for own name, reference of Meta.exposed
 		# Return a reference to the destination object
 		return destination
+
+	# Creates a new instance of the passed Tests class definition, and runs it.
+	#
+	# param   string  name       The name of the test suite that we are running.
+	# param   mixed   reference  A reference to the Tests class definition.
+	# return  object             A reference to the Meta object.
+	test: (name, reference) ->
+		# Output the name of the test suite we are running
+		console.log "Running \"#{name}\""
+		# Create a new instance of the passed Tests class reference
+		instance = new reference
+		# Execute the tests
+		instance.run()
+		# Return a reference to the Meta object
+		return @
+	
 }
 
 # Expose the overlay function itself
