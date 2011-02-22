@@ -21,6 +21,9 @@ sourceFiles = [
 	'Classes/DelayedTask'
 	'Classes/DebouncedTask'
 	'Classes/Tasks'
+	'Classes/Assertion'
+	'Classes/AssertionSuccess'
+	'Classes/AssertionFailure'
 	'Classes/Test'
 	'Classes/Tests'
 ]
