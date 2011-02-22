@@ -45,8 +45,10 @@ class Tests
 			test = new Test name, method, @
 			# Subscribe to the start channel
 			test.addObserver "start", (testInstance) ->
+				# Grab a reference to the test name
+				testName = testInstance.name
 				# Output the fact that the test has started
-				console.log "Started \"#{testInstance}\""
+				console.log "Started test \"#{testName}\""
 			# Subscribe to the assertion channel
 			test.addObserver "assertion", (testInstance, assertionInstance) ->
 				# Grab a shortcut variable to the test description
@@ -54,14 +56,27 @@ class Tests
 				# If the assertion was successful
 				if assertionInstance instanceof AssertionSuccess
 					# Build the positive assertion output text
-					prefix = "Asserted that "
+					prefix = "Successfully asserted that"
+				# Otherwise, the assertion was not successful
 				else
 					# Start building the negative assertion output text
-					prefix = "Failed to assert that "
-				# Build the finished text to output
-				output = "#{prefix} #{description}"
+					prefix = "Failed to assert that"
 				# Display the output
-				console.log output
+				console.log "#{prefix} #{description}"
+			# Subscribe to the complete channel
+			test.addObserver "complete", (testInstance) ->
+				# Grab a reference to the test name
+				testName = testInstance.name
+				# If the test was successful
+				if testInstance.successful
+					# Build the positive output text
+					prefix = "Successfully completed"
+				# Otherwise, the test was not successful
+				else
+					# Build the negative output text
+					prefix = "Failed to successfully complete"
+				# Display the finished output
+				console.log "#{prefix} \"#{testName}\""
 			# Add this Test class instance to the tests collection on this
 			# class instance
 			@tests[name] = test
