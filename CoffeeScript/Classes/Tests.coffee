@@ -43,10 +43,25 @@ class Tests
 			# Create a new instance of the Test class for managing this test
 			# function, and set it up to run at this class instances scope
 			test = new Test name, method, @
-			# Subscribe to the universal observable channel
-			test.addObserver "*", (channel, testInstance) ->
-				# TODO: Make the output mechanism more robust
-				console.log channel + ' - ' + testInstance.name
+			# Subscribe to the start channel
+			test.addObserver "start", (testInstance) ->
+				# Output the fact that the test has started
+				console.log "Started \"#{testInstance}\""
+			# Subscribe to the assertion channel
+			test.addObserver "assertion", (testInstance, assertionInstance) ->
+				# Grab a shortcut variable to the test description
+				description = assertionInstance.description
+				# If the assertion was successful
+				if assertionInstance instanceof AssertionSuccess
+					# Build the positive assertion output text
+					prefix = "Asserted that "
+				else
+					# Start building the negative assertion output text
+					prefix = "Failed to assert that "
+				# Build the finished text to output
+				output = "#{prefix} #{description}"
+				# Display the output
+				console.log output
 			# Add this Test class instance to the tests collection on this
 			# class instance
 			@tests[name] = test

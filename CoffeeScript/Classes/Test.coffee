@@ -80,15 +80,14 @@ class Test extends PublishSubscribe
 		# If the assertion is true
 		if subject is true
 			# The assertion is a successful one
-#assertion = new AssertionSuccess description
+			assertion = new AssertionSuccess description
 		# Otherwise
 		else
 			# If any assertions fail, that means that this test was not
 			# successful
 			@successful = false
 			# The assertion is a failure
-# assertion = new AssertionFailure description
-		assertion = description
+			assertion = new AssertionFailure description
 		# Add this assertion to the local assertions collection
 		@assertions.push assertion
 		# Forward the assertion class instance to any observers
