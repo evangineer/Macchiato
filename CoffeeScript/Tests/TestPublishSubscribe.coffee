@@ -53,3 +53,6 @@ class TestPublishSubscribe extends Tests
 		instance.publish "channel-a", [1]
 		instance.publish "channel-b", [2]
 		instance.publish "channel-c", [3]
+
+# Add this test class to the tests collection
+Meta.test "TestPublishSubscribe", TestPublishSubscribe
