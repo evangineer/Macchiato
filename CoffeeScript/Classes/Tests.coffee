@@ -17,12 +17,27 @@
 # any test is not recommended. Avoid class instance variables at all costs!
 class Tests
 
+	# Accepts the name of this test suite as the first argument, and stores it
+	# as a class variable for future reference.
+	#
+	# param  string  name  The name of the test suite that this class instance
+	#                      class instance is responsible for.
+	constructor: (name) ->
+		# Store the name of this test suite on this class instance
+		@name = name
+
 	# Resets all of the class variables to their initial state.
 	#
 	# return  object  A reference to this class instance.
 	reset: ->
 		# Initialize the local tests collection to an empty object
 		@tests = {}
+		# Initialize the class variable that tracks the grand total of
+		# successful unit tests
+		@successfulTests = 0
+		# Initialize the class variable for tracking the grand total of
+		# failed unit tests
+		@failedTests = 0
 		# Return a reference to this class instance
 		return @
 
@@ -43,40 +58,11 @@ class Tests
 			# Create a new instance of the Test class for managing this test
 			# function, and set it up to run at this class instances scope
 			test = new Test name, method, @
-			# Subscribe to the start channel
-			test.addObserver "start", (testInstance) ->
-				# Grab a reference to the test name
-				testName = testInstance.name
-				# Output the fact that the test has started
-				console.log "Started test \"#{testName}\""
-			# Subscribe to the assertion channel
-			test.addObserver "assertion", (testInstance, assertionInstance) ->
-				# Grab a shortcut variable to the test description
-				description = assertionInstance.description
-				# If the assertion was successful
-				if assertionInstance instanceof AssertionSuccess
-					# Build the positive assertion output text
-					prefix = "Successfully asserted that"
-				# Otherwise, the assertion was not successful
-				else
-					# Start building the negative assertion output text
-					prefix = "Failed to assert that"
-				# Display the output
-				console.log "#{prefix} #{description}"
-			# Subscribe to the complete channel
-			test.addObserver "complete", (testInstance) ->
-				# Grab a reference to the test name
-				testName = testInstance.name
-				# If the test was successful
-				if testInstance.successful
-					# Build the positive output text
-					prefix = "Successfully completed"
-				# Otherwise, the test was not successful
-				else
-					# Build the negative output text
-					prefix = "Failed to successfully complete"
-				# Display the finished output
-				console.log "#{prefix} \"#{testName}\""
+			# Attach the test observer function on this class instance to listen
+			# for notifications on the universal topic channel of the test
+			test.addObserver "*", (channel, test, reference = null) =>
+				# Forward the arguments that were passed in to the test observer
+				@observer channel, test, reference
 			# Add this Test class instance to the tests collection on this
 			# class instance
 			@tests[name] = test
@@ -84,6 +70,59 @@ class Tests
 			test.run()
 		# Return a reference to this class instance
 		return @
+
+	# Listens for notifications on the universal channel of every test, and
+	# outputs summary information for failed tests.
+	#
+	# param   string  channel              The name of the observable topic
+	#                                      channel where this notification was
+	#                                      issued.
+	# param   object  test                 A reference to the Test class
+	#                                      instance that the notification was
+	#                                      issued from.
+	# param   object  reference  optional  An optional reference to an instance
+	#                                      of either AssertionSuccess,
+	#                                      AssertionFailure, or an exception.
+	# return  object                       A reference to this class instance.
+	observer: (channel, test, reference = null) ->
+		# Grab a reference to the name of the test
+		testName = "#{@name}.#{test.name}"
+		# Determine what to do based on the observable topic channel
+		switch channel
+			# If this was an assertion
+			when "assertion"
+				# Determine if the assertion was successful or not
+				successful = reference instanceof AssertionSuccess
+				# If this assertion was not successful
+				if not successful
+					# Grab a reference to the description of the assertion
+					description = reference.description
+					# Output the fact that this assertion failed
+					console.log "#{testName}: Failed to assert that " +
+						"#{description}"
+			# If this was a completed test or an exception
+			when "exception" or "complete"
+				# Grab a shortcut to the flag that indicates if this test had
+				# an exception or not
+				exception = test.exception
+				# Grab a shortcut variable to the flag that indicates if this
+				# test was successful or not
+				successful = test.successful
+				# If the test had an exception
+				if exception
+					# Output the fact that this test threw an exception
+					console.log "#{testName} threw an exception"
+					# Increment the total number of failed tests
+					@failedTests++
+				# If the test was otherwise not successful
+				else if not successful
+					# Output the fact that this test failed
+					console.log "#{testName} failed"
+					# Increment the total number of failed tests
+					@failedTests++
+				else
+					# Increment the total number of successful tests
+					@successfulTests++
 
 # Expose this class to the parent scope
 Meta.expose "Tests", Tests
