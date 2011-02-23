@@ -33,6 +33,7 @@ sourceFiles = [
 
 # Define the list of files that make up the Unit Tests
 unitTestSourceFiles = [
+	"Tests/TestObservable"
 	"Tests/TestPublishSubscribe"
 ]
 
