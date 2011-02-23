@@ -20,7 +20,6 @@ sourceFiles = [
 	"Classes/Observable"
 	"Classes/PublishSubscribe"
 	"Classes/Task"
-	"Classes/IdempotentTask"
 	"Classes/DelayedTask"
 	"Classes/DebouncedTask"
 	"Classes/Tasks"
