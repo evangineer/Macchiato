@@ -106,6 +106,8 @@ task "build", "Build the complete #{libraryName} library", ->
 			echo "Done."
 			# Run the unit tests if we should
 			if runTests
+				# Echo the fact that we are going to run all of the unit tests
+				echo "Running tests..."
 				# Define the shell command to execute the unit tests
 				testCommand = "node JavaScript/#{outputFilename}"
 				# Execute the tests
