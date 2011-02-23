@@ -43,6 +43,12 @@ class Test extends PublishSubscribe
 		@successful = null
 		# Create a place for all of the assertions to go
 		@assertions = []
+		# Define a place where we can store the grand total of successful
+		# assertions
+		@successfulAssertions = 0
+		# Define a place where we can store the grand total of failed
+		# assertions
+		@failedAssertions = 0
 		# Define a new instance of Task for the test function
 		task = new Task testFunction, testScope
 		# Add an observer function to the task to watch for exceptions
@@ -81,6 +87,8 @@ class Test extends PublishSubscribe
 		if subject is true
 			# The assertion is a successful one
 			assertion = new AssertionSuccess description
+			# Increment the successful assertions total
+			@successfulAssertions++
 		# Otherwise
 		else
 			# If any assertions fail, that means that this test was not
@@ -88,12 +96,25 @@ class Test extends PublishSubscribe
 			@successful = false
 			# The assertion is a failure
 			assertion = new AssertionFailure description
+			# Increment the failed assertions total
+			@failedAssertions++
 		# Add this assertion to the local assertions collection
 		@assertions.push assertion
 		# Forward the assertion class instance to any observers
 		@notifyObservers "assertion", [@, assertion]
 		# Return a reference to this class instance
 		return @
+
+	# Asserts that the value passed in the result parameter is boolean false.
+	#
+	# param   string   description  A human-readable description for this
+	#                               assertion.
+	# param   boolean  subject      The subject of the assertion, either true or
+	#                               false.
+	# return  object                A reference to this class instance.
+	assertFalse: (description, subject) ->
+		# Assert that the subject is false and return the result
+		return @assert description, not subject
 
 	# Asserts that the value passed in for the left-hand side of the comparison
 	# is exactly equal to the value passed in for the right-hand side of the
@@ -108,7 +129,7 @@ class Test extends PublishSubscribe
 	# return  object                A reference to this class instance.
 	assertEqual: (description, left, right) ->
 		# Compare the left to the right and then forward the result of the test
-		# along with the human-readable description to the assert function.
+		# along with the human-readable description to the assert function
 		return @assert description, left is right
 
 	# Asserts that the value passed in for the left-hand side of the comparison
@@ -124,7 +145,7 @@ class Test extends PublishSubscribe
 	# return  object                A reference to this class instance.
 	assertNotEqual: (description, left, right) ->
 		# Compare the left to the right and then forward the result of the test
-		# along with the human-readable description to the assert function.
+		# along with the human-readable description to the assert function
 		return @assert description, left isnt right
 
 	# Sets the boolean class variable that indicates that this test is
