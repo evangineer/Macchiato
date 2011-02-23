@@ -1,8 +1,10 @@
-# Define a class to manage a single Idempotent Task
+# This file defines the IdempotentTask class, and exposes it to the outside
+# world.
 class IdempotentTask extends Task
 
-	# Takes the task function and any options, then assigns them to this
-	# object.
+	# Calls the parent constructor, forwarding the task function and optional
+	# run scope arguments. After that, we call the reset method to initialize
+	# the run count class variable.
 	#
 	# param  function  taskFunction            The task function itself.
 	# param  object    runScope      optional  The scope to run the task
@@ -13,7 +15,8 @@ class IdempotentTask extends Task
 		# Reset the run count to its initial state
 		@reset()
 
-	# Resets the state of this class instance.
+	# Reinitializes the run count class variable, allowing the task function to
+	# be run, even if it has already been run once.
 	#
 	# return  object  A reference to this class instance.
 	reset: ->
