@@ -1,6 +1,6 @@
 # This file defines the DelayedTask class, and exposes it to the outside world.
 #
-# DelayedTask wraps the actual running of the task function in JavaScript
+# DelayedTask wraps the actual running of the task function in a JavaScript
 # timeout using the setTimeout function. This makes the execution of the "run"
 # method on this class detached from the eventual execution of the task function
 # itself.
