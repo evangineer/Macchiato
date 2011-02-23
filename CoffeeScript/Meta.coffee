@@ -45,10 +45,9 @@ Meta = {
 	# param   mixed   reference  A reference to the Tests class definition.
 	# return  object             A reference to the Meta object.
 	test: (name, reference) ->
-		# Output the name of the test suite we are running
-		console.log "Running \"#{name}\""
-		# Create a new instance of the passed Tests class reference
-		instance = new reference
+		# Create a new instance of the passed Tests class reference, passing it
+		# the name of the test suite it represents
+		instance = new reference name
 		# Execute the tests
 		instance.run()
 		# Return a reference to the Meta object
