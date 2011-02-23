@@ -87,42 +87,40 @@ class Tests
 	observer: (channel, test, reference = null) ->
 		# Grab a reference to the name of the test
 		testName = "#{@name}.#{test.name}"
-		# Determine what to do based on the observable topic channel
-		switch channel
-			# If this was an assertion
-			when "assertion"
-				# Determine if the assertion was successful or not
-				successful = reference instanceof AssertionSuccess
-				# If this assertion was not successful
-				if not successful
-					# Grab a reference to the description of the assertion
-					description = reference.description
-					# Output the fact that this assertion failed
-					console.log "#{testName}: Failed to assert that " +
-						"#{description}"
-			# If this was a completed test or an exception
-			when "exception" or "complete"
-				# Grab a shortcut to the flag that indicates if this test had
-				# an exception or not
-				exception = test.exception
-				# Grab a shortcut variable to the flag that indicates if this
-				# test was successful or not
-				successful = test.successful
-				# If the test had an exception
-				if exception
-					# Output the fact that this test threw an exception
-					console.log "#{testName} threw an exception"
-					# Increment the total number of failed tests
-					@failedTests++
-				# If the test was otherwise not successful
-				else if not successful
-					# Output the fact that this test failed
-					console.log "#{testName} failed"
-					# Increment the total number of failed tests
-					@failedTests++
-				else
-					# Increment the total number of successful tests
-					@successfulTests++
+		# If this was an assertion
+		if channel is "assertion"
+			# Determine if the assertion was successful or not
+			successful = reference instanceof AssertionSuccess
+			# If this assertion was not successful
+			if not successful
+				# Grab a reference to the description of the assertion
+				description = reference.description
+				# Output the fact that this assertion failed
+				console.log "#{testName}: Failed to assert that " +
+					"#{description}"
+		# If this was a completed test or an exception
+		else if channel is "exception" or channel is "complete"
+			# Grab a shortcut to the flag that indicates if this test had
+			# an exception or not
+			exception = test.exception
+			# Grab a shortcut variable to the flag that indicates if this
+			# test was successful or not
+			successful = test.successful
+			# If the test had an exception
+			if exception
+				# Output the fact that this test threw an exception
+				console.log "#{testName}: Threw an exception"
+				# Increment the total number of failed tests
+				@failedTests++
+			# If the test was otherwise not successful
+			else if not successful
+				# Output the fact that this test failed
+				console.log "#{testName}: Test failed"
+				# Increment the total number of failed tests
+				@failedTests++
+			else
+				# Increment the total number of successful tests
+				@successfulTests++
 
 # Expose this class to the parent scope
 Meta.expose "Tests", Tests
